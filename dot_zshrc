@@ -1,0 +1,14 @@
+export ZSH="$HOME/.oh-my-zsh" 
+export PATH="./bin:$PATH"
+
+source ~/.zplug/init.zsh
+
+zplug "dracula/zsh", as:theme
+
+plugins=(
+	git
+)
+
+source $ZSH/oh-my-zsh.sh
+zplug load
+
