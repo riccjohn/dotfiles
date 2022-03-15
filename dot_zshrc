@@ -5,16 +5,39 @@ export TERM="xterm-256color"
 export EDITOR='nvim'
 export VISUAL='nvim'
 
-source ~/.zplug/init.zsh
+export ZPLUG_HOME=$HOME/.zplug
 
+if [[ ! -d $ZPLUG_HOME ]]; then
+  git clone https://github.com/zplug/zplug $ZPLUG_HOME
+  source $ZPLUG_HOME/init.zsh && zplug update --self
+fi
+
+source $ZPLUG_HOME/init.zsh
+
+# zplug plugins
 zplug "dracula/zsh", as:theme
+
+
+# zsh users
+zplug "zsh-users/zsh-completions",              defer:0
+zplug "zsh-users/zsh-autosuggestions",          defer:2, on:"zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting",      defer:3, on:"zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-syntax-highlighting"
+
 
 plugins=(
 	git
-	zsh-autosuggestions
-	zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
 zplug load
 
