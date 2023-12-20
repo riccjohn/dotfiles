@@ -60,5 +60,14 @@ dcu() { dc up "$@"; }
 dce() { dc exec "$@"; }
 dcr() { dc run "$@"; }
 
+# exa
+alias ls='exa'
+alias ll='exa -lah'
+alias tree='exa --tree'
+
+# bat
+alias cat='bat'
+
+# terraform
 alias tf=terraform
 
